@@ -29,8 +29,7 @@ class Loja extends FbitsHttp{
             $response = $this->http->get("/loja", array(
                 "headers" => [
                     "Authorization" => "BASIC " . $controller->getToken()
-                ],
-                "query" => $filters
+                ]
             ));
 
             $body = (string)$response->getBody();
