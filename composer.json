@@ -1,0 +1,32 @@
+{
+    "name": "ceresaconsultoria/fbits-library-php",
+    "description": "SDK da api da Tray Fbits",
+    "keywords": ["api", "library", "psr-3", "fbits", "tray"],
+    "homepage": "https://github.com/ceresaconsultoria/fbits-library-php",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Weslley Ceresa",
+            "email": "weslley@fivesdev.com",
+            "homepage": "https://fivesdev.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.3",
+        "guzzlehttp/guzzle": "^6.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fbits\\": "src/"
+        }
+    },
+    "scripts": {
+        "test": []
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require-dev": {
+        "victorjonsson/markdowndocs": "^1.3"
+    }
+}
