@@ -40,7 +40,7 @@ class Produto extends FbitsHttp{
         } catch (\GuzzleHttp\Exception\ServerException $ex) {
             $response = $ex->getResponse();
             $body = (string)$response->getBody();
-            $json = json_decode($body);               
+            $json = json_decode($body);                
                             
             if(is_object($json)){
                 if(isset($json->codigo))
