@@ -34,7 +34,7 @@ class Categoria extends FbitsHttp{
                 ],
                 "query" => $filters
             ));
-
+            
             $body = (string)$response->getBody();
                         
             return json_decode($body);
