@@ -22,6 +22,46 @@ class Produto extends FbitsHttp{
         parent::__construct($controller->getConfig());
     }
     
+    public function listarImagensProduto($id, array $filters = []){
+        $controller = FbitsController::getInstance();
+        
+        try{
+            $response = $this->http->get("/produtos/".$id."/imagens", array(
+                "headers" => [
+                    "Authorization" => "BASIC " . $controller->getToken()
+                ],
+                "query" => $filters
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (\GuzzleHttp\Exception\ServerException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);                
+                            
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);               
+                                    
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        }
+    }
+    
     public function listarProdutos(array $filters = []){
         $controller = FbitsController::getInstance();
         
