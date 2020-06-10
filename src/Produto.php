@@ -23,7 +23,7 @@ class Produto extends FbitsHttp{
     
     const TIPO_IDENTIFICADOR_SKU = "Sku";
     const TIPO_IDENTIFICADOR_PRODUTOID = "ProdutoId";
-    const TIPO_IDENTIFICADOR_PRODUTOVARIANTID = "ProdutoVariantId";
+    const TIPO_IDENTIFICADOR_PRODUTOVARIANTID = "ProdutoVarianteId";
     
     public function __construct() {
         $controller = FbitsController::getInstance();
