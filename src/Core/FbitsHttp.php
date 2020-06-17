@@ -20,7 +20,7 @@ class FbitsHttp {
     protected $http;
     
     const BASE_URL = "https://api.fbits.net/";
-    
+           
     public function __construct(array $config = []) {
         $defaultConfig = array(
             'base_uri' => self::BASE_URL,
