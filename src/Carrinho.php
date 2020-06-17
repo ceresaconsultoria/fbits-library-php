@@ -9,6 +9,10 @@
 namespace Fbits;
 
 use Fbits\Core\FbitsHttp;
+use Fbits\Enum\ReturnCode;
+use Fbits\Exceptions\FbitsException;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 
 /**
  * Description of Carrinho
@@ -38,7 +42,7 @@ class Carrinho extends FbitsHttp{
                         
             return json_decode($body);
             
-        } catch (\GuzzleHttp\Exception\ServerException $ex) {
+        } catch (ServerException $ex) {
             $response = $ex->getResponse();
             $body = (string)$response->getBody();
             $json = json_decode($body);               
@@ -49,7 +53,7 @@ class Carrinho extends FbitsHttp{
             }                          
             
             throw new FbitsException($ex->getMessage(), $response->getStatusCode());
-        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+        } catch (ClientException $ex) {
             $response = $ex->getResponse();
             $body = (string)$response->getBody();
             $json = json_decode($body);               
@@ -79,7 +83,7 @@ class Carrinho extends FbitsHttp{
                         
             return json_decode($body);
             
-        } catch (\GuzzleHttp\Exception\ServerException $ex) {
+        } catch (ServerException $ex) {
             $response = $ex->getResponse();
             $body = (string)$response->getBody();
             $json = json_decode($body);               
@@ -90,7 +94,7 @@ class Carrinho extends FbitsHttp{
             }                          
             
             throw new FbitsException($ex->getMessage(), $response->getStatusCode());
-        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+        } catch (ClientException $ex) {
             $response = $ex->getResponse();
             $body = (string)$response->getBody();
             $json = json_decode($body);               
