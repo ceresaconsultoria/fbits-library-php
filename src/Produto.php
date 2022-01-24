@@ -190,4 +190,43 @@ class Produto extends FbitsHttp{
         }
     }
     
+    public function listarCategoriasProduto($id, array $filters = []){
+        $controller = FbitsController::getInstance();
+        
+        try{
+            $response = $this->http->get("/produtos/".$id."/categorias", array(
+                "headers" => [
+                    "Authorization" => "BASIC " . $controller->getToken()
+                ],
+                "query" => $filters
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (ServerException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);                
+                            
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        } catch (ClientException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);               
+                                    
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        }
+    }
 }
