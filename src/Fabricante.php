@@ -30,7 +30,7 @@ class Fabricante extends FbitsHttp{
         $controller = FbitsController::getInstance();
         
         try{
-            $response = $this->http->get("/categorias", array(
+            $response = $this->http->get("/fabricantes", array(
                 "headers" => [
                     "Authorization" => "BASIC " . $controller->getToken()
                 ]
