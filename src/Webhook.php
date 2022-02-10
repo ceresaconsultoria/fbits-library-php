@@ -26,6 +26,48 @@ class Webhook extends FbitsHttp{
         parent::__construct($controller->getConfig());
     }
     
+    public function removerInscricao($id){
+        $controller = FbitsController::getInstance();
+        
+        try{
+            $response = $this->http->delete("/webhook/inscricao/" . $id, array(
+                "headers" => [
+                    "Authorization" => "BASIC " . $controller->getToken()
+                ]
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (ServerException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);                
+                            
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    if(isset($json->mensagem))
+                        throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+                    
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        } catch (ClientException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);               
+                                    
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        }
+    }
+    
     public function listarTopicos(){
         $controller = FbitsController::getInstance();
         
