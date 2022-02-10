@@ -47,7 +47,10 @@ class Webhook extends FbitsHttp{
                             
             if(is_object($json)){
                 if(isset($json->codigo))
-                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
+                    if(isset($json->mensagem))
+                        throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+                    
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
             }                          
             
             throw new FbitsException($ex->getMessage(), $response->getStatusCode());
@@ -86,7 +89,10 @@ class Webhook extends FbitsHttp{
                             
             if(is_object($json)){
                 if(isset($json->codigo))
-                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
+                    if(isset($json->mensagem))
+                        throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+                    
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
             }                          
             
             throw new FbitsException($ex->getMessage(), $response->getStatusCode());
@@ -126,7 +132,10 @@ class Webhook extends FbitsHttp{
                             
             if(is_object($json)){
                 if(isset($json->codigo))
-                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
+                    if(isset($json->mensagem))
+                        throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+                    
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
             }                          
             
             throw new FbitsException($ex->getMessage(), $response->getStatusCode());
@@ -165,8 +174,11 @@ class Webhook extends FbitsHttp{
                             
             if(is_object($json)){
                 if(isset($json->codigo))
-                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
-            }                          
+                    if(isset($json->mensagem))
+                        throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+                    
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+            }                         
             
             throw new FbitsException($ex->getMessage(), $response->getStatusCode());
         } catch (ClientException $ex) {
@@ -205,8 +217,11 @@ class Webhook extends FbitsHttp{
                             
             if(is_object($json)){
                 if(isset($json->codigo))
-                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
-            }                          
+                    if(isset($json->mensagem))
+                        throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+                    
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+            }                           
             
             throw new FbitsException($ex->getMessage(), $response->getStatusCode());
         } catch (ClientException $ex) {
@@ -244,8 +259,11 @@ class Webhook extends FbitsHttp{
                             
             if(is_object($json)){
                 if(isset($json->codigo))
-                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
-            }                          
+                    if(isset($json->mensagem))
+                        throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+                    
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+            }                         
             
             throw new FbitsException($ex->getMessage(), $response->getStatusCode());
         } catch (ClientException $ex) {
