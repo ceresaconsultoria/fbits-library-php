@@ -24,6 +24,45 @@ class Categoria extends FbitsHttp{
         parent::__construct($controller->getConfig());
     }
             
+    public function detalhesCategoria($id){
+        $controller = FbitsController::getInstance();
+        
+        try{
+            $response = $this->http->get("/categorias/".$id, array(
+                "headers" => [
+                    "Authorization" => "BASIC " . $controller->getToken()
+                ]
+            ));
+            
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (\GuzzleHttp\Exception\ServerException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);               
+                            
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);               
+                                    
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        }
+    }
+    
     public function listarCategorias(array $filters = []){
         $controller = FbitsController::getInstance();
         
