@@ -30,7 +30,7 @@ class Frete extends FbitsHttp{
         $controller = FbitsController::getInstance();
         
         try{
-            $response = $this->http->get("/fretes/cotacoes", array(
+            $response = $this->http->post("/fretes/cotacoes", array(
                 "headers" => [ 
                     "Authorization" => "BASIC " . $controller->getToken()
                 ],
