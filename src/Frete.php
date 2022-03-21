@@ -31,7 +31,7 @@ class Frete extends FbitsHttp{
         
         try{
             $response = $this->http->get("/fretes/cotacoes", array(
-                "headers" => [
+                "headers" => [ 
                     "Authorization" => "BASIC " . $controller->getToken()
                 ],
                 "json" => $produtos
