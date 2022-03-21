@@ -34,7 +34,8 @@ class Frete extends FbitsHttp{
                 "headers" => [ 
                     "Authorization" => "BASIC " . $controller->getToken()
                 ],
-                "json" => $produtos
+                "json" => $produtos,
+                "query" => $filters
             ));
 
             $body = (string)$response->getBody();
