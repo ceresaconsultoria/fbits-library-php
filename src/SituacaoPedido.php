@@ -1,5 +1,12 @@
 <?php
 
+use Fbits\Core\FbitsHttp;
+use Fbits\Enum\ReturnCode;
+use Fbits\Exceptions\FbitsException;
+use Fbits\FbitsController;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -7,8 +14,6 @@
  */
 
 namespace Fbits;
-
-use Fbits\Core\FbitsHttp;
 
 /**
  * Description of SituacaoPedido

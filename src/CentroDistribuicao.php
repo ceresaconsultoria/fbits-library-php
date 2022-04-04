@@ -15,62 +15,22 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
 
 /**
- * Description of Pedido
+ * Description of CentroDistribuicao
  *
  * @author weslley
  */
-class Pedido extends FbitsHttp{
+class CentroDistribuicao extends FbitsHttp{
     
     public function __construct() {
         $controller = FbitsController::getInstance();
         parent::__construct($controller->getConfig());
     }
     
-    public function criar(array $data){
+    public function listar(){
         $controller = FbitsController::getInstance();
         
         try{
-            $response = $this->http->post("/pedidos", array(
-                "headers" => [
-                    "Authorization" => "BASIC " . $controller->getToken()
-                ],
-                "json" => $data
-            ));
-
-            $body = (string)$response->getBody();
-                        
-            return json_decode($body);
-            
-        } catch (ServerException $ex) {
-            $response = $ex->getResponse();
-            $body = (string)$response->getBody();
-            $json = json_decode($body);                
-                            
-            if(is_object($json)){
-                if(isset($json->codigo))
-                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
-            }                          
-            
-            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
-        } catch (ClientException $ex) {
-            $response = $ex->getResponse();
-            $body = (string)$response->getBody();
-            $json = json_decode($body);               
-                                    
-            if(is_object($json)){
-                if(isset($json->codigo))
-                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
-            }                          
-            
-            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
-        }
-    }
-    
-    public function detalhes($id){
-        $controller = FbitsController::getInstance();
-        
-        try{
-            $response = $this->http->get("/pedidos/".$id, array(
+            $response = $this->http->get("/centrosdistribuicao", array(
                 "headers" => [
                     "Authorization" => "BASIC " . $controller->getToken()
                 ]

@@ -9,6 +9,10 @@
 namespace Fbits;
 
 use Fbits\Core\FbitsHttp;
+use Fbits\Enum\ReturnCode;
+use Fbits\Exceptions\FbitsException;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 
 /**
  * Description of Parceiro
