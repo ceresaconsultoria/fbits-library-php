@@ -22,4 +22,358 @@ class Usuario extends FbitsHttp{
         parent::__construct($controller->getConfig());
     }
     
+    public function editarEndereco($idOrEmail, $enderecoId, array $data){
+        $controller = FbitsController::getInstance();
+        
+        try{
+            $response = $this->http->get("/usuarios/".$idOrEmail."/enderecos/".$enderecoId, array(
+                "headers" => [
+                    "Authorization" => "BASIC " . $controller->getToken()
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (ServerException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);                
+                            
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        } catch (ClientException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);               
+                                    
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        }
+    }
+    
+    public function criarEndereco($idOrEmail, array $data){
+        $controller = FbitsController::getInstance();
+        
+        try{
+            $response = $this->http->get("/usuarios/".$idOrEmail."/enderecos", array(
+                "headers" => [
+                    "Authorization" => "BASIC " . $controller->getToken()
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (ServerException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);                
+                            
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        } catch (ClientException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);               
+                                    
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        }
+    }
+    
+    public function detalhesEndereco($idOrEmail){
+        $controller = FbitsController::getInstance();
+        
+        try{
+            $response = $this->http->get("/usuarios/".$idOrEmail."/enderecos", array(
+                "headers" => [
+                    "Authorization" => "BASIC " . $controller->getToken()
+                ]
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (ServerException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);                
+                            
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        } catch (ClientException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);               
+                                    
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        }
+    }
+    
+    public function editar($idOrEmail, array $data){
+        $controller = FbitsController::getInstance();
+        
+        try{
+            $response = $this->http->put("/usuarios/".$idOrEmail, array(
+                "headers" => [
+                    "Authorization" => "BASIC " . $controller->getToken()
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (ServerException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);                
+                            
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        } catch (ClientException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);               
+                                    
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        }
+    }
+    
+    public function criar(array $data){
+        $controller = FbitsController::getInstance();
+        
+        try{
+            $response = $this->http->post("/usuarios", array(
+                "headers" => [
+                    "Authorization" => "BASIC " . $controller->getToken()
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (ServerException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);                
+                            
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        } catch (ClientException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);               
+                                    
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        }
+    }
+    
+    public function detalhesViaId($id){
+        $controller = FbitsController::getInstance();
+        
+        try{
+            $response = $this->http->get("/usuarios/usuarioId/".$id, array(
+                "headers" => [
+                    "Authorization" => "BASIC " . $controller->getToken()
+                ]
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (ServerException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);                
+                            
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        } catch (ClientException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);               
+                                    
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        }
+    }
+    
+    public function detalhesViaCnpj($cnpj){
+        $controller = FbitsController::getInstance();
+        
+        try{
+            $response = $this->http->get("/usuarios/cnpj/".$cnpj, array(
+                "headers" => [
+                    "Authorization" => "BASIC " . $controller->getToken()
+                ]
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (ServerException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);                
+                            
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        } catch (ClientException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);               
+                                    
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        }
+    }
+    
+    public function detalhesViaCpf($cpf){
+        $controller = FbitsController::getInstance();
+        
+        try{
+            $response = $this->http->get("/usuarios/cpf/".$cpf, array(
+                "headers" => [
+                    "Authorization" => "BASIC " . $controller->getToken()
+                ]
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (ServerException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);                
+                            
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        } catch (ClientException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);               
+                                    
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        }
+    }
+    
+    public function detalhesViaEmail($email){
+        $controller = FbitsController::getInstance();
+        
+        try{
+            $response = $this->http->get("/usuarios/email/".$email, array(
+                "headers" => [
+                    "Authorization" => "BASIC " . $controller->getToken()
+                ]
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (ServerException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);                
+                            
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        } catch (ClientException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);               
+                                    
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        }
+    }
 }
