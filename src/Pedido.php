@@ -26,6 +26,46 @@ class Pedido extends FbitsHttp{
         parent::__construct($controller->getConfig());
     }
     
+    public function atualizarStatus($id, array $data){
+        $controller = FbitsController::getInstance();
+        
+        try{
+            $response = $this->http->put("/pedidos/".$id."/status", array(
+                "headers" => [
+                    "Authorization" => "BASIC " . $controller->getToken()
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (ServerException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);                
+                            
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        } catch (ClientException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);               
+                                    
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        }
+    }
+    
     public function criar(array $data){
         $controller = FbitsController::getInstance();
         
