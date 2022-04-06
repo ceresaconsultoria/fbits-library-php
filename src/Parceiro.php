@@ -30,7 +30,7 @@ class Parceiro extends FbitsHttp{
         $controller = FbitsController::getInstance();
         
         try{
-            $response = $this->http->put("/parcerios/".$id, array(
+            $response = $this->http->put("/parceiros/".$id, array(
                 "headers" => [
                     "Authorization" => "BASIC " . $controller->getToken()
                 ],
@@ -70,7 +70,7 @@ class Parceiro extends FbitsHttp{
         $controller = FbitsController::getInstance();
         
         try{
-            $response = $this->http->post("/parcerios", array(
+            $response = $this->http->post("/parceiros", array(
                 "headers" => [
                     "Authorization" => "BASIC " . $controller->getToken()
                 ],
@@ -110,7 +110,7 @@ class Parceiro extends FbitsHttp{
         $controller = FbitsController::getInstance();
         
         try{
-            $response = $this->http->get("/parcerios/".$nomeOrId, array(
+            $response = $this->http->get("/parceiros/".$nomeOrId, array(
                 "headers" => [
                     "Authorization" => "BASIC " . $controller->getToken()
                 ]
