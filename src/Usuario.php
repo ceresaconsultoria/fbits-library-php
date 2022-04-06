@@ -106,7 +106,7 @@ class Usuario extends FbitsHttp{
         }
     }
     
-    public function detalhesEndereco($idOrEmail){
+    public function listarEnderecos($idOrEmail){
         $controller = FbitsController::getInstance();
         
         try{
