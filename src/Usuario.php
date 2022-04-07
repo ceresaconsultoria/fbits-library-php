@@ -30,7 +30,7 @@ class Usuario extends FbitsHttp{
         $controller = FbitsController::getInstance();
         
         try{
-            $response = $this->http->get("/usuarios/".$idOrEmail."/enderecos/".$enderecoId, array(
+            $response = $this->http->put("/usuarios/".$idOrEmail."/enderecos/".$enderecoId, array(
                 "headers" => [
                     "Authorization" => "BASIC " . $controller->getToken()
                 ],
@@ -70,7 +70,7 @@ class Usuario extends FbitsHttp{
         $controller = FbitsController::getInstance();
         
         try{
-            $response = $this->http->get("/usuarios/".$idOrEmail."/enderecos", array(
+            $response = $this->http->post("/usuarios/".$idOrEmail."/enderecos", array(
                 "headers" => [
                     "Authorization" => "BASIC " . $controller->getToken()
                 ],
