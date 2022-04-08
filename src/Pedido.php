@@ -26,6 +26,205 @@ class Pedido extends FbitsHttp{
         parent::__construct($controller->getConfig());
     }
     
+    public function atualizarRastreamentoParcial($pedidoId, $pedidoRastreamentoId, array $data){
+        $controller = FbitsController::getInstance();
+        
+        try{
+            $response = $this->http->put("/pedidos/".$pedidoId."/rastreamento/".$pedidoRastreamentoId, array(
+                "headers" => [
+                    "Authorization" => "BASIC " . $controller->getToken()
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (ServerException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);                
+                            
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        } catch (ClientException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);               
+                                    
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        }
+    }
+    
+    public function atualizarRastreamento($pedidoId, $pedidoRastreamentoId, array $data){
+        $controller = FbitsController::getInstance();
+        
+        try{
+            $response = $this->http->put("/pedidos/".$pedidoId."/rastreamento/".$pedidoRastreamentoId, array(
+                "headers" => [
+                    "Authorization" => "BASIC " . $controller->getToken()
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (ServerException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);                
+                            
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        } catch (ClientException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);               
+                                    
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        }
+    }
+    
+    public function atualizarRastreamentoDataEntrega($id, array $data){
+        $controller = FbitsController::getInstance();
+        
+        try{
+            $response = $this->http->put("/pedidos/".$id."/rastreamento", array(
+                "headers" => [
+                    "Authorization" => "BASIC " . $controller->getToken()
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (ServerException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);                
+                            
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        } catch (ClientException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);               
+                                    
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        }
+    }
+    
+    public function cadastrarRastreamento($id, array $data){
+        $controller = FbitsController::getInstance();
+        
+        try{
+            $response = $this->http->post("/pedidos/".$id."/rastreamento", array(
+                "headers" => [
+                    "Authorization" => "BASIC " . $controller->getToken()
+                ],
+                "json" => $data
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (ServerException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);                
+                            
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        } catch (ClientException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);               
+                                    
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        }
+    }
+    
+    public function listaRastreamento($id){
+        $controller = FbitsController::getInstance();
+        
+        try{
+            $response = $this->http->get("/pedidos/".$id."/rastreamento", array(
+                "headers" => [
+                    "Authorization" => "BASIC " . $controller->getToken()
+                ]
+            ));
+
+            $body = (string)$response->getBody();
+                        
+            return json_decode($body);
+            
+        } catch (ServerException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);                
+                            
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $ex->getMessage()), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        } catch (ClientException $ex) {
+            $response = $ex->getResponse();
+            $body = (string)$response->getBody();
+            $json = json_decode($body);               
+                                    
+            if(is_object($json)){
+                if(isset($json->codigo))
+                    throw new FbitsException(ReturnCode::codeDescription($json->codigo, $json->mensagem), $response->getStatusCode());
+            }                          
+            
+            throw new FbitsException($ex->getMessage(), $response->getStatusCode());
+        }
+    }
+    
     public function atualizarStatus($id, array $data){
         $controller = FbitsController::getInstance();
         
